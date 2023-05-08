@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom'
 import Button from '../Button'
 import { ProductProps } from '../../@types/ProductsProps'
+import { Star } from 'react-feather'
 
 const ListItem = ({ product }: { product: ProductProps }) => {
-  const formatPrice = (price: string) => Number(price).toFixed(2)
+  const formatPrice = (price: number) => price.toFixed(2)
 
   return (
     <div className="lg:flex rounded-lg bg-white p-6 shadow-md">
       <img
         alt={product.title}
         src={product.image}
-        className="object-contain max-w-[150px] h-[200px] rounded-lg"
+        className="m-auto sm:m-0 object-contain max-w-[150px] h-[200px] rounded-lg"
       />
 
       <div className="flex flex-col justify-between py-6 lg:mx-6 gap-2">
@@ -23,6 +24,13 @@ const ListItem = ({ product }: { product: ProductProps }) => {
           </span>
           {product.title}
         </Link>
+
+        <div className="flex text-center gap-1">
+          <Star className="text-yellow-400" size={16} fill="#facc15" />
+          <span className="text-[12px] text-gray-500">
+            {product.rating.rate}
+          </span>
+        </div>
 
         <span className="text-[16px] text-gray-500">
           $ {formatPrice(product.price)}
