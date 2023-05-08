@@ -4,8 +4,11 @@ import { API_ROUTES } from '../constants/api-routes'
 import { KEYS } from '../constants/keys'
 
 export const getProducts = async (slug: string | null) => {
+  const checkedSlug = slug === 'all' ? null : slug
   const response = await api.get(
-    slug ? `${API_ROUTES.productsByCategory}/${slug}` : API_ROUTES.products,
+    checkedSlug
+      ? `${API_ROUTES.productsByCategory}/${checkedSlug}`
+      : API_ROUTES.products,
   )
 
   return response.data

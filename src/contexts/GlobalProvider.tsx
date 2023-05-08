@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useMemo } from 'react'
+import { createContext, ReactNode, useMemo, useState } from 'react'
 
 import { GlobalProviderProps } from './GlobalProviderProps'
 import { useGetProducts } from '../hooks/useGetProducts'
@@ -7,15 +7,20 @@ import { useGetCategories } from '../hooks/useGetCategories'
 export const GlobalContext = createContext({} as GlobalProviderProps)
 
 export default function GlobalProvider({ children }: { children: ReactNode }) {
-  const products = useGetProducts(null)
+  const [filterSlug, setFilterSlug] = useState<string | null>(null)
+  const [orderBy, setOrderBy] = useState<string | null>(null)
+  const products = useGetProducts(filterSlug)
   const categories = useGetCategories()
 
   const valuesContext = useMemo(
     () => ({
       products,
       categories,
+      setFilterSlug,
+      setOrderBy,
+      orderBy,
     }),
-    [products, categories],
+    [products, categories, orderBy],
   )
 
   return (

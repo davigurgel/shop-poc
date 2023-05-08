@@ -1,8 +1,12 @@
 export type ProductProps = {
   id: number
   title: string
-  price: string
+  price: number
   category: string
   description: string
   image: string
+  rating: {
+    count: number
+    rate: number
+  }
 }

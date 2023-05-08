@@ -2,18 +2,18 @@ import React, { useContext } from 'react'
 import Select from '../Select'
 import { GlobalContext } from '../../contexts/GlobalProvider'
 
-const options = [
+const orderOptions = [
   {
-    id: 'foo',
-    label: 'foo',
+    id: 'default',
+    label: 'default',
   },
   {
-    id: 'bar',
-    label: 'bar',
+    id: 'price',
+    label: 'price',
   },
   {
-    id: 'foobar',
-    label: 'foobar',
+    id: 'popularity',
+    label: 'popularity',
   },
 ]
 
@@ -27,6 +27,8 @@ const FILTER_ALL = [
 const ListBar = () => {
   const {
     categories: { data },
+    setFilterSlug,
+    setOrderBy,
   } = useContext(GlobalContext)
 
   const categoriesOptions =
@@ -35,16 +37,16 @@ const ListBar = () => {
       label: item,
     })) || []
 
-  const handleChange = (type: string, option: string) => {
+  const handleChange = async (type: string, option: string) => {
     if (type === 'filter') {
-      console.log('====================================')
-      console.log('aqui')
-      console.log('====================================')
+      setFilterSlug(option)
+    } else {
+      setOrderBy(option)
     }
   }
 
   return (
-    <div className="flex gap-2 mx-16 bg-gray-700 border border-gray-100 my-4 p-2 rounded-md justify-end">
+    <div className="flex gap-2 bg-gray-700 border border-gray-100 my-4 p-2 rounded-md justify-end">
       <Select
         label="Filter"
         name="filter"
@@ -56,7 +58,7 @@ const ListBar = () => {
       <Select
         label="Order by"
         name="order"
-        options={options}
+        options={orderOptions}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleChange('order', event.target.value)
         }
