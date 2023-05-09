@@ -10,13 +10,8 @@ const getCategories = async () => {
 }
 
 export const useGetCategories = () => {
-  // const { handleError } = useError()
-
   return useQuery({
     queryKey: [KEYS.categories],
     queryFn: () => getCategories(),
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-    // onError: (error: any) => handleError(error),
   })
 }

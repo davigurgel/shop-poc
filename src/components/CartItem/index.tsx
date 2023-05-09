@@ -1,8 +1,9 @@
 import { Minus, Plus } from 'react-feather'
+import MyImage from '../MyImage'
 
 const CartItem = () => (
   <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-    <img
+    <MyImage
       src="https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1131&q=80"
       alt="product-image"
       className="w-full rounded-lg sm:w-40"

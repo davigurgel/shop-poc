@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom'
 import Button from '../Button'
 import { ProductProps } from '../../@types/ProductsProps'
 import { Star } from 'react-feather'
+import MyImage from '../MyImage'
 
 const ListItem = ({ product }: { product: ProductProps }) => {
   const formatPrice = (price: number) => price.toFixed(2)
 
   return (
     <div className="lg:flex rounded-lg bg-white p-6 shadow-md">
-      <img
+      <MyImage
         alt={product.title}
         src={product.image}
         className="m-auto sm:m-0 object-contain max-w-[150px] h-[200px] rounded-lg"

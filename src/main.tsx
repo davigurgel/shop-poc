@@ -13,6 +13,8 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: RETRY_ERROR_FETCH,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     },
     mutations: {
       retry: RETRY_ERROR_FETCH,

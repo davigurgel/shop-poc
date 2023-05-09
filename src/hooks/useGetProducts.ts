@@ -15,13 +15,8 @@ export const getProducts = async (slug: string | null) => {
 }
 
 export const useGetProducts = (slug: string | null = null) => {
-  // const { handleError } = useError()
-
   return useQuery({
     queryKey: [KEYS.products, slug],
     queryFn: () => getProducts(slug),
-    // refetchOnMount: false,
-    // refetchOnWindowFocus: false,
-    // onError: (error: any) => handleError(error),
   })
 }

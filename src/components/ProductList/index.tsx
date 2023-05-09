@@ -4,7 +4,7 @@ import { GlobalContext } from '../../contexts/GlobalProvider'
 import { ProductProps } from '../../@types/ProductsProps'
 import ListBar from '../ListBar'
 
-const ProductList = () => {
+const ProductList = ({ showListBar = true }: { showListBar?: boolean }) => {
   const {
     products: { data, isLoading },
     orderBy,
@@ -27,7 +27,8 @@ const ProductList = () => {
   return (
     <section>
       <div className="container px-6 mx-auto">
-        <ListBar />
+        {showListBar && <ListBar />}
+
         <div className="grid grid-cols-1 gap-8 mt-2 md:mt-4 md:grid-cols-2">
           {isLoading && <p>Loading...</p>}
           {orderProducts(orderBy).map((item) => (
