@@ -6,5 +6,7 @@ export type GlobalProviderProps = {
   categories: UseQueryResult<string[]>
   setFilterSlug: (value: string | null) => void
   setOrderBy: (value: string | null) => void
+  handleAddCart: (value: ProductProps) => void
   orderBy: string | null
+  userCart: ProductProps[]
 }

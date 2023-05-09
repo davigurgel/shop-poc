@@ -3,8 +3,12 @@ import Button from '../Button'
 import { ProductProps } from '../../@types/ProductsProps'
 import { Star } from 'react-feather'
 import MyImage from '../MyImage'
+import { useContext } from 'react'
+import { GlobalContext } from '../../contexts/GlobalProvider'
 
 const ListItem = ({ product }: { product: ProductProps }) => {
+  const { handleAddCart } = useContext(GlobalContext)
+
   const formatPrice = (price: number) => price.toFixed(2)
 
   return (
@@ -36,7 +40,10 @@ const ListItem = ({ product }: { product: ProductProps }) => {
         <span className="text-[16px] text-gray-500">
           $ {formatPrice(product.price)}
         </span>
-        <Button text="Add to Cart" />
+        <Button
+          onClick={() => handleAddCart({ ...product, quantity: 1 })}
+          text="Add to Cart"
+        />
       </div>
     </div>
   )

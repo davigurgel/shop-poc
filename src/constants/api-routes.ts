@@ -3,4 +3,5 @@ export const API_ROUTES = {
   categories: 'products/categories',
   productsByCategory: 'products/category',
   product: 'products/',
+  cart: 'carts',
 } as const

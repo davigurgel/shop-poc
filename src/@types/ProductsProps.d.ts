@@ -9,4 +9,5 @@ export type ProductProps = {
     count: number
     rate: number
   }
+  quantity?: number
 }
