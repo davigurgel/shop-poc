@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useCallback, useMemo, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import { GlobalProviderProps } from './GlobalProviderProps'
 import { useGetProducts } from '../hooks/useGetProducts'
@@ -17,7 +24,7 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
   const handleAddCart = useCallback((cartItem: ProductProps) => {
     setUserCart((prevState) => {
       if (prevState.find((product) => product.id === cartItem.id)) {
-        return prevState.map((product) => {
+        const newState = prevState.map((product) => {
           if (product.id === cartItem.id) {
             return {
               ...product,
@@ -27,10 +34,58 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
 
           return product
         })
+
+        localStorage.setItem('shopPocCart', JSON.stringify(newState))
+
+        return newState
       }
+
+      localStorage.setItem(
+        'shopPocCart',
+        JSON.stringify([...prevState, cartItem]),
+      )
 
       return [...prevState, cartItem]
     })
+  }, [])
+
+  const handleUpdateCartItemQuantity = useCallback(
+    (productId: number, value: number) => {
+      setUserCart((prevState) => {
+        const newState = prevState.map((item) => {
+          if (item.id === productId) {
+            return { ...item, quantity: value }
+          }
+
+          return item
+        })
+
+        localStorage.setItem('shopPocCart', JSON.stringify(newState))
+
+        return newState
+      })
+    },
+    [],
+  )
+
+  const handleDeleteCartItem = useCallback((productId: number) => {
+    setUserCart((prevState) => {
+      const newState = prevState.filter((item) => item.id !== productId)
+
+      localStorage.setItem('shopPocCart', JSON.stringify(newState))
+
+      return newState
+    })
+  }, [])
+
+  useEffect(() => {
+    const storage = localStorage.getItem('shopPocCart')
+
+    if (storage) {
+      setUserCart(JSON.parse(storage))
+    } else {
+      setUserCart([])
+    }
   }, [])
 
   const valuesContext = useMemo(
@@ -42,8 +97,18 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
       orderBy,
       handleAddCart,
       userCart,
+      handleUpdateCartItemQuantity,
+      handleDeleteCartItem,
     }),
-    [products, categories, orderBy, handleAddCart, userCart],
+    [
+      products,
+      categories,
+      orderBy,
+      handleAddCart,
+      userCart,
+      handleUpdateCartItemQuantity,
+      handleDeleteCartItem,
+    ],
   )
 
   return (

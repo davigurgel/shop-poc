@@ -2,13 +2,15 @@ import { useParams } from 'react-router-dom'
 import Button from '../../components/Button'
 import { useGetSingleProduct } from '../../hooks/useGetSingleProduct'
 import { Star } from 'react-feather'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ProductProps } from '../../@types/ProductsProps'
 import ListItem from '../../components/ListItem'
 import { useGetRelatedProducts } from '../../hooks/useGetRelatedProducts'
 import MyImage from '../../components/MyImage'
+import { GlobalContext } from '../../contexts/GlobalProvider'
 
 const Product = () => {
+  const { handleAddCart } = useContext(GlobalContext)
   const [relatedProducts, setRelatedProducts] = useState<ProductProps[]>([])
   const [showRelatedProducts, setShowRelatedProducts] = useState<boolean>(false)
   const { id } = useParams()
@@ -35,12 +37,12 @@ const Product = () => {
 
   return (
     data && (
-      <section className="text-gray-700 body-font overflow-hidden bg-white">
+      <section className="min-h-screen text-gray-700 body-font overflow-hidden bg-[#f3f3f3]">
         <div className="container px-5 py-24 mx-auto">
-          <div className="mx-auto flex flex-wrap items-center justify-center">
+          <div className="mx-auto py-5 flex flex-wrap items-center rounded-lg justify-center bg-white shadow-md">
             <MyImage
               alt={data.title}
-              className="lg:w-1/4 sm:w-1/2 w-full object-contain object-center rounded border border-gray-200"
+              className="lg:w-1/4 sm:w-1/2 w-full object-contain object-center"
               src={data.image}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -62,7 +64,10 @@ const Product = () => {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   $ {formatPrice(data.price)}
                 </span>
-                <Button text="Add to cart" />
+                <Button
+                  onClick={() => handleAddCart({ ...data, quantity: 1 })}
+                  text="Add to cart"
+                />
               </div>
             </div>
           </div>

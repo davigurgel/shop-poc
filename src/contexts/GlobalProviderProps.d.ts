@@ -9,4 +9,6 @@ export type GlobalProviderProps = {
   handleAddCart: (value: ProductProps) => void
   orderBy: string | null
   userCart: ProductProps[]
+  handleUpdateCartItemQuantity: (productId: number, value: number) => void
+  handleDeleteCartItem: (productId: number) => void
 }

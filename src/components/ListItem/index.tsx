@@ -5,6 +5,7 @@ import { Star } from 'react-feather'
 import MyImage from '../MyImage'
 import { useContext } from 'react'
 import { GlobalContext } from '../../contexts/GlobalProvider'
+import { i18n } from '../../i18n'
 
 const ListItem = ({ product }: { product: ProductProps }) => {
   const { handleAddCart } = useContext(GlobalContext)
@@ -42,7 +43,7 @@ const ListItem = ({ product }: { product: ProductProps }) => {
         </span>
         <Button
           onClick={() => handleAddCart({ ...product, quantity: 1 })}
-          text="Add to Cart"
+          text={i18n.t('general.add')}
         />
       </div>
     </div>

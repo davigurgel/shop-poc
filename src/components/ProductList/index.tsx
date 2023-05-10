@@ -3,6 +3,7 @@ import ListItem from '../ListItem'
 import { GlobalContext } from '../../contexts/GlobalProvider'
 import { ProductProps } from '../../@types/ProductsProps'
 import ListBar from '../ListBar'
+import Loading from '../Loading'
 
 const ProductList = ({ showListBar = true }: { showListBar?: boolean }) => {
   const {
@@ -24,13 +25,14 @@ const ProductList = ({ showListBar = true }: { showListBar?: boolean }) => {
     return data || []
   }
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <section>
       <div className="container px-6 mx-auto">
         {showListBar && <ListBar />}
 
         <div className="grid grid-cols-1 gap-8 mt-2 md:mt-4 md:grid-cols-2">
-          {isLoading && <p>Loading...</p>}
           {orderProducts(orderBy).map((item) => (
             <ListItem key={item.id} product={item} />
           ))}

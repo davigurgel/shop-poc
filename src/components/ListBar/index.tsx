@@ -1,26 +1,27 @@
 import React, { useContext } from 'react'
 import Select from '../Select'
 import { GlobalContext } from '../../contexts/GlobalProvider'
+import { i18n } from '../../i18n'
 
 const orderOptions = [
   {
-    id: 'default',
-    label: 'default',
+    id: i18n.t('listBar.options.default'),
+    label: i18n.t('listBar.options.default'),
   },
   {
-    id: 'price',
-    label: 'price',
+    id: i18n.t('listBar.options.price'),
+    label: i18n.t('listBar.options.price'),
   },
   {
-    id: 'popularity',
-    label: 'popularity',
+    id: i18n.t('listBar.options.popularity'),
+    label: i18n.t('listBar.options.popularity'),
   },
 ]
 
 const FILTER_ALL = [
   {
-    id: 'all',
-    label: 'all',
+    id: i18n.t('listBar.options.all'),
+    label: i18n.t('listBar.options.all'),
   },
 ]
 

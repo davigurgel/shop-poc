@@ -17,7 +17,7 @@ const MyImage = ({
     <>
       <img
         alt={alt}
-        className={className}
+        className={`cursor-pointer ${className}`}
         src={src}
         onClick={() => setOpen(true)}
       />
