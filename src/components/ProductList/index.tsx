@@ -3,11 +3,10 @@ import ListItem from '../ListItem'
 import { GlobalContext } from '../../contexts/GlobalProvider'
 import { ProductProps } from '../../@types/ProductsProps'
 import ListBar from '../ListBar'
-import Loading from '../Loading'
 
 const ProductList = ({ showListBar = true }: { showListBar?: boolean }) => {
   const {
-    products: { data, isLoading },
+    products: { data },
     orderBy,
   } = useContext(GlobalContext)
 
@@ -25,9 +24,7 @@ const ProductList = ({ showListBar = true }: { showListBar?: boolean }) => {
     return data || []
   }
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <section>
       <div className="container px-6 mx-auto">
         {showListBar && <ListBar />}

@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Route, Routes as RoutesApp } from 'react-router-dom'
 
 import { ROUTES } from '../constants/routes'
+import Loading from '../components/Loading'
 
 const BaseLayout = lazy(() => import('../layout/BaseLayout'))
 const Home = lazy(() => import('../pages/Home'))
@@ -13,7 +14,7 @@ const Routes = () => (
     <Route
       path={ROUTES.home}
       element={
-        <Suspense fallback={<div />}>
+        <Suspense fallback={<Loading />}>
           <BaseLayout />
         </Suspense>
       }
@@ -21,7 +22,7 @@ const Routes = () => (
       <Route
         path={ROUTES.home}
         element={
-          <Suspense fallback={<div />}>
+          <Suspense fallback={<Loading />}>
             <Home />
           </Suspense>
         }
@@ -29,7 +30,7 @@ const Routes = () => (
       <Route
         path={ROUTES.cart}
         element={
-          <Suspense fallback={<div />}>
+          <Suspense fallback={<Loading />}>
             <Cart />
           </Suspense>
         }
@@ -37,7 +38,7 @@ const Routes = () => (
       <Route
         path={ROUTES.product}
         element={
-          <Suspense fallback={<div />}>
+          <Suspense fallback={<Loading />}>
             <Product />
           </Suspense>
         }
